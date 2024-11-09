@@ -89,7 +89,7 @@ contract TicTacToeTest is Test {
         vm.startPrank(PLAYER_ONE);
         s_ticTacToe.createNewGame(PLAYER_TWO);
         vm.expectEmit(true, false, false, true);
-        emit TicTacToe.PlayerMadeMove(0, PLAYER_ONE, 0);
+        emit TicTacToe.PlayerMadeMove(0, PLAYER_ONE, 0, 1);
         s_ticTacToe.makeMove(0, 0);
         vm.stopPrank();
         TicTacToe.Game memory game = s_ticTacToe.getGame(0);

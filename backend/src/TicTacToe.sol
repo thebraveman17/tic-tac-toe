@@ -25,8 +25,8 @@ contract TicTacToe {
     Game[] private s_games;
 
     event GameCreated(uint256 gameId, address indexed playerOne, address indexed PlayerTwo);
-    event PlayerMadeMove(uint256 gameId, address indexed player, uint8 position);
-    event GameFinished(uint256 gameId, Winner winner);
+    event PlayerMadeMove(uint256 indexed gameId, address indexed player, uint8 position, uint8 value);
+    event GameFinished(uint256 indexed gameId, Winner winner);
 
     error GameDoesNotExist();
     error GameAlreadyFinished();
@@ -67,12 +67,13 @@ contract TicTacToe {
         require(game.board[position] == 0, PositionAlreadyTaken());
 
         game.board[position] = game.turn;
-        emit PlayerMadeMove(gameId, msg.sender, position);
+        emit PlayerMadeMove(gameId, msg.sender, position, game.turn);
 
         Winner winner = _evaluateGameStatus(game.board);
 
         if (winner != Winner.None) {
             game.winner = winner;
+            game.turn = 0;
 
             emit GameFinished(gameId, winner);
         } else {
@@ -86,6 +87,11 @@ contract TicTacToe {
         require(gameId < s_games.length, GameDoesNotExist());
 
         return s_games[gameId];
+    }
+
+    /// @notice Returns the number of games
+    function getNumberOfGames() external view returns (uint256) {
+        return s_games.length;
     }
 
     /// @notice Returns the player to play for the given game
