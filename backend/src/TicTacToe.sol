@@ -25,7 +25,7 @@ contract TicTacToe {
     Game[] private s_games;
 
     event GameCreated(uint256 gameId, address indexed playerOne, address indexed PlayerTwo);
-    event PlayerMadeMove(uint256 indexed gameId, address indexed player, uint8 position, uint8 value);
+    event PlayerMadeMove(uint256 indexed gameId, address indexed player, uint8 position, uint8 value, uint8 turn);
     event GameFinished(uint256 indexed gameId, Winner winner);
 
     error GameDoesNotExist();
@@ -65,9 +65,8 @@ contract TicTacToe {
         address playerToPlay = _getPlayerToPlay(game);
         require(msg.sender == playerToPlay, NotYourTurn());
         require(game.board[position] == 0, PositionAlreadyTaken());
-
-        game.board[position] = game.turn;
-        emit PlayerMadeMove(gameId, msg.sender, position, game.turn);
+        uint8 value = game.turn;
+        game.board[position] = value;
 
         Winner winner = _evaluateGameStatus(game.board);
 
@@ -75,9 +74,11 @@ contract TicTacToe {
             game.winner = winner;
             game.turn = 0;
 
+            emit PlayerMadeMove(gameId, msg.sender, position, value, game.turn);
             emit GameFinished(gameId, winner);
         } else {
-            game.turn = game.turn == 1 ? 2 : 1;
+            game.turn = value == 1 ? 2 : 1;
+            emit PlayerMadeMove(gameId, msg.sender, position, value, game.turn);
         }
     }
 

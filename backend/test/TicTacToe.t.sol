@@ -89,7 +89,7 @@ contract TicTacToeTest is Test {
         vm.startPrank(PLAYER_ONE);
         s_ticTacToe.createNewGame(PLAYER_TWO);
         vm.expectEmit(true, false, false, true);
-        emit TicTacToe.PlayerMadeMove(0, PLAYER_ONE, 0, 1);
+        emit TicTacToe.PlayerMadeMove(0, PLAYER_ONE, 0, 1, 2);
         s_ticTacToe.makeMove(0, 0);
         vm.stopPrank();
         TicTacToe.Game memory game = s_ticTacToe.getGame(0);
@@ -123,6 +123,12 @@ contract TicTacToeTest is Test {
     function testGetGameRevertsIfGameDoesNotExist() external {
         vm.expectRevert(TicTacToe.GameDoesNotExist.selector);
         s_ticTacToe.getGame(0);
+    }
+
+    function testGetNumberOfGames() external {
+        vm.prank(PLAYER_ONE);
+        s_ticTacToe.createNewGame(PLAYER_TWO);
+        assertEq(s_ticTacToe.getNumberOfGames(), 1);
     }
 
     function _testGameStateUpdatesAreCorrect(TicTacToe.Game memory game) internal pure {
