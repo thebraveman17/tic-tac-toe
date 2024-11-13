@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Address } from 'viem';
 import { isAddress } from 'viem';
-import { BASE_SEPOLIA_CHAIN_ID } from '../constants';
+import { BASE_MAINNET_CHAIN_ID } from '../constants';
 import { getCreateNewGameConfig } from 'src/contracts';
 import Modal from './Modal';
 
@@ -68,7 +68,7 @@ export default function CreateNewGame() {
         <Transaction
           contracts={createNewGameConfig}
           className="w-full"
-          chainId={BASE_SEPOLIA_CHAIN_ID}
+          chainId={BASE_MAINNET_CHAIN_ID}
           onError={handleError}
           onSuccess={handleSuccess}
         >

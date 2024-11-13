@@ -3,7 +3,7 @@ import { Game } from 'src/interfaces';
 import { useState, useEffect } from 'react';
 import Square from './Square';
 import { useReadContract, useWatchContractEvent } from 'wagmi';
-import { BASE_SEPOLIA_CHAIN_ID, TicTacToeContractAddress, TicTacToeABI} from 'src/constants';
+import { BASE_MAINNET_CHAIN_ID, TicTacToeContractAddress, TicTacToeABI} from 'src/constants';
 import { config } from 'src/config';
 import Modal from 'src/components/Modal';
 
@@ -78,7 +78,7 @@ export default function Board({ gameId, address}: { gameId: string, address: str
     address: TicTacToeContractAddress,
     abi: TicTacToeABI,
     config,
-    chainId: BASE_SEPOLIA_CHAIN_ID,
+    chainId: BASE_MAINNET_CHAIN_ID,
     args: {
       gameId: gameIdBigInt
     },
@@ -113,7 +113,7 @@ export default function Board({ gameId, address}: { gameId: string, address: str
     address: TicTacToeContractAddress,
     abi: TicTacToeABI,
     config,
-    chainId: BASE_SEPOLIA_CHAIN_ID,
+    chainId: BASE_MAINNET_CHAIN_ID,
     args: {
       gameId: gameIdBigInt
     },

@@ -1,7 +1,7 @@
 import type { Address } from 'viem';
 
-export const BASE_SEPOLIA_CHAIN_ID = 84532;
-export const TicTacToeContractAddress: Address = '0x1d42A0E015D86fc87DAda17857BD54DC549957Bc';
+export const BASE_MAINNET_CHAIN_ID = 8453;
+export const TicTacToeContractAddress: Address = '0x5084951aca1844FF69bC4110DB32c95F9CDAD05B';
 export const TicTacToeABI = [
   {
     "type": "function",
