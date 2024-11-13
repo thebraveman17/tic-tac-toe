@@ -1,0 +1,2 @@
+- Change turn when you catch MadeMove events
+- Adjust next turn to switch to nothing when there is a winner
