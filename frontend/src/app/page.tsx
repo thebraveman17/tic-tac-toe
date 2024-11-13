@@ -1,5 +1,4 @@
 'use client';
-import TransactionWrapper from 'src/components/TransactionWrapper';
 import WalletWrapper from 'src/components/WalletWrapper';
 import { useAccount } from 'wagmi';
 import CreateNewGame from 'src/components/CreateNewGame';
